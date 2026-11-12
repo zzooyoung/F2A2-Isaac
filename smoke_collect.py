@@ -3,8 +3,8 @@ import torch
 from actor import Actor, squashed_log_prob
 from replay import Replay, copy_for_peer
 
-def main():
-    torch.manual_seed(7)
+def main(seed=7):
+    torch.manual_seed(seed)
 
     actors = [Actor(), Actor()]
     replays = [Replay(capacity=128), Replay(capacity=128)]
@@ -68,6 +68,8 @@ def main():
             f"peer_obs={tuple(batch['peer_obs'].shape)} | "
             f"mean ratio={ratio.mean().item():.3f}"
         )
+    return replays    
+    
 
 if __name__ == "__main__":
     main()
